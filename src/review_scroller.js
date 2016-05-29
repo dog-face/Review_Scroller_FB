@@ -4,16 +4,16 @@
 var counter = 0;
 var json_authors = [];
 var json_reviews = [];
-
+var wait_time = 5000;
+var timer;
 function loop() {
+    timer = setTimeout(loop, wait_time);
+    wait_time = 5000;
     if (counter >= json_reviews.length) counter = 0;
+    if (counter < 0) counter = json_reviews.length-1;
     $('#reviewText').text(json_reviews[counter]);
     $('#authorName').text(json_authors[counter]);
-    //document.getElementById('reviewText').innerHTML = reviews[counter];
-    //document.getElementById('authorName').innerHTML = authors[counter];
     counter++;
-    setTimeout(loop, 5000);
-    //alert(json_reviews[counter]);
 }
 
 /*
@@ -57,4 +57,16 @@ function load_and_run() {
 function test() {
     $('#reviewText').text("Hello, review!");
     alert("testing");
+}
+
+function scroll_next(){
+    clearTimeout(timer);
+    wait_time = 10000; //extra delay for reading
+    loop();
+}
+function scroll_prev(){
+    counter -= 2;
+    clearTimeout(timer);
+    wait_time = 10000; //extra delay for reading
+    loop();
 }
