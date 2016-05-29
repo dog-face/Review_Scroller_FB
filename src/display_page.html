@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Review Scroller Tester</title>
-    <script src="scroller_function.js"> </script>
+    <script src="../jquery-1.12.4.min.js"></script>
+    <script src="review_scroller.js"> </script>
 </head>
-<body onload="simple_loop()">
-    <iframe id="reviewFile1" src="../reviews/review1.txt" onload="LoadFile(1);" style="display: none;"></iframe>
-    <iframe id="reviewFile2" src="../reviews/review2.txt" onload="LoadFile(2);" style="display: none;"></iframe>
-    <iframe id="reviewFile3" src="../reviews/review3.txt" onload="LoadFile(3);" style="display: none;"></iframe>
-    <iframe id="reviewFile4" src="../reviews/review4.txt" onload="LoadFile(4);" style="display: none;"></iframe>
-
+<body>
+    <!--<iframe id="reviewFile1" src="../review_scraper_fb/output/review1.txt" onload="loadFile(1);" style="display: none;"></iframe>
+    <iframe id="reviewFile2" src="../review_scraper_fb/output/review2.txt" onload="loadFile(2);" style="display: none;"></iframe>
+    <iframe id="reviewFile3" src="../review_scraper_fb/output/review3.txt" onload="loadFile(3);" style="display: none;"></iframe>
+    <iframe id="reviewFile4" src="../review_scraper_fb/output/review4.txt" onload="loadFile(4);" style="display: none;"></iframe>
+    -->
     <div id="textslide">
-        <p id = "reviewText">"Hello There"</p>
-        <p id = "authorName">"Hello There"</p>
-        <button type="button" onclick="loop()">Try it</button>
+        <p id = "reviewText">Review</p>
+        <p id = "authorName">Author</p>
+        <button type="button" onclick="test()">Test it</button>
+        <button type="button" onclick="load_and_run()">Try it</button>
     </div>
 </body>
 </html>
