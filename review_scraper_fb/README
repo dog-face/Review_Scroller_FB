@@ -1,0 +1,8 @@
+Dependencies:
+Selenium
+https://selenium-python.readthedocs.org/installation.html
+
+To run:
+navigate to …/src folder
+$ python scraper.py
+check output folder for scraped reviews
