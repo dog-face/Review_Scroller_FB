@@ -1,6 +1,7 @@
 #created by mznco
 
 from selenium import webdriver
+import sys
 from selenium.webdriver.common.keys import Keys
 
 import json
@@ -9,6 +10,9 @@ import json
 # YELP #
 ########
 driver = webdriver.Firefox()
+
+print("Scraping Yelp...", end=" ")
+sys.stdout.flush()
 driver.get("http://www.yelp.com/biz/fireborn-studios-pittsburgh")
 assert "Fireborn Studios" in driver.title
 all_review_elements = driver.find_element_by_class_name("ylist-bordered")
@@ -37,10 +41,13 @@ for i, review in enumerate(reviews):
     json_stars.append(num_stars)
 
     json_source.append("Yelp")
+print("Done.")
 
 ##########
 # Google #
 ##########
+print("Scraping Google...", end=" ")
+sys.stdout.flush()
 driver.get("https://www.google.com/search?client=safari&rls=en&q=Fireborn+Studios,+2338+Sarah+St,+Pittsburgh,+PA+15203&ie=UTF-8&oe=UTF-8")
 view_all_reviews = driver.find_element_by_xpath("//*[contains(text(), 'View all Google reviews')]")
 view_all_reviews = view_all_reviews.click()
@@ -58,28 +65,19 @@ reviews = all_review_elements.find_elements_by_xpath("//span[@jsl='$t t-HoBr0JCF
 stars = all_review_elements.find_elements_by_xpath("//span[@class='_pxg _Jxg']")
 authors = all_review_elements.find_elements_by_class_name("_e8k")
 
-print(len(reviews))
-print(len(stars))
-print(len(authors))
+#print(len(reviews))
+#print(len(stars))
+#print(len(authors))
 
 for i, review_element in enumerate(authors):
     json_authors.append(authors[i].text)
     json_reviews.append(reviews[i].text)
     num_stars = stars[i].get_attribute("aria-label").split(" ")[1].split(".")[0] #don't touch this
-    print(authors[i].text + " " + num_stars)
-    print(reviews[i].text + "\n")
+    #print(authors[i].text + " " + num_stars)
+    #print(reviews[i].text + "\n")
     json_stars.append(num_stars)
     json_source.append("Google")
-
-#I don't know why, but it won't find more than the top 10 reviews. Oh well, that's enough for now.
-#TODO hopefully resolve this issue at some point
-
-
-
-#review stars seem tricky to scrape... I don't know where it shows the number
-#review content is also tricky. different class names for each review, and if the review is too long,
-#it gets turned into a snippet... $t t-HoBr0JCFrys;$x 0;
-
+print("Done.")
 #write to disk
 
 json_review_output = open("../output/json_review_output.json", "w")
@@ -93,4 +91,4 @@ json.dump(json_stars, json_stars_output)
 
 json_source_output = open("../output/json_source_output.json", "w")
 json.dump(json_source, json_source_output)
-print("Done. ")
+print("ALL DONE. ")
