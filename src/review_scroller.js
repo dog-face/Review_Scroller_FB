@@ -1,3 +1,5 @@
+//created by mznco
+
 /*
  * Scrolling reviews
  */
@@ -17,7 +19,7 @@ function loop() {
     counter++;
 }
 
-/*
+/*  
  * json data loading
  */
 function load_json(){
