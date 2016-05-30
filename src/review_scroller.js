@@ -4,7 +4,7 @@
 var counter = 0;
 var json_authors = [];
 var json_reviews = [];
-var wait_time = 5000;
+var wait_time = 5000; //default wait time: 5 secs
 var timer;
 function loop() {
     timer = setTimeout(loop, wait_time);
@@ -13,6 +13,7 @@ function loop() {
     if (counter < 0) counter = json_reviews.length-1;
     $('#reviewText').text(json_reviews[counter]);
     $('#authorName').text(json_authors[counter]);
+    $('#stars').attr('src', "../resources/" + json_stars[counter] + "-star.png");
     counter++;
 }
 
@@ -42,6 +43,16 @@ function load_json(){
             //alert(response);
         },
         async: false
+    });
+
+    $.ajax({
+        url: "../review_scraper_fb/output/json_stars_output.json",
+        dataType: "json",
+        success: function(response){
+            json_stars = response;
+            alert(response);
+        },
+        async:false
     });
 }
 
